@@ -2,8 +2,6 @@
 
 I built this website to keep track of attendance, assignment deadlines, and grades in one place. Each student has their own account and dashboard.
 
-https://wt11gcth-8000.inc1.devtunnels.ms/login
-
 
 **Username:** `student 01`  
 **Password on the deployed demo:** `PlannerDemo01!`
