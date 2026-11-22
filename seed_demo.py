@@ -1,5 +1,3 @@
-#Run from the student_planner folder on a new deployment.
-
 import hashlib
 import secrets
 import sqlite3
@@ -8,23 +6,31 @@ from contextlib import closing
 from main import create_tables
 
 
+def add_account(db, username, password):
+    if db.execute("SELECT id FROM students WHERE username = ?", (username,)).fetchone():
+        print(username + " already exists. Its password and records have been preserved.")
+        return None
+    salt = secrets.token_hex(16)
+    password_hash = hashlib.pbkdf2_hmac(
+        "sha256", password.encode(), bytes.fromhex(salt), 600_000
+    ).hex()
+    return db.execute(
+        "INSERT INTO students (username, salt, password_hash) VALUES (?, ?, ?)",
+        (username, salt, password_hash),
+    ).lastrowid
+
+
 def seed_demo():
     create_tables()
     with closing(sqlite3.connect("planner.db")) as db, db:
         db.execute("BEGIN IMMEDIATE")
-        username = "student 01"
-        if db.execute("SELECT id FROM students WHERE username = ?", (username,)).fetchone():
-            print("student 01 already exists. Its password and records have been preserved.")
-            return
 
-        salt = secrets.token_hex(16)
-        password_hash = hashlib.pbkdf2_hmac(
-            "sha256", b"PlannerDemo01!", bytes.fromhex(salt), 600_000
-        ).hex()
-        student = db.execute(
-            "INSERT INTO students (username, salt, password_hash) VALUES (?, ?, ?)",
-            (username, salt, password_hash),
-        ).lastrowid
+        if add_account(db, "student 02", "PlannerDemo02!"):
+            print("student 02 created.")
+
+        student = add_account(db, "student 01", "PlannerDemo01!")
+        if student is None:
+            return
 
         attendance = {
             "Mathematics": [("2026-11-22", 1, 0)],
