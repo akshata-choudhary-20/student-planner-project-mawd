@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Dashboard | Student Planner</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <main class="planner-dashboard">
+        <h1>My dashboard</h1>
+        <p>Logged in as <strong>{{ username }}</strong>.</p>
+
+        <div class="planner-cards">
+
+            <!-- First card -->
+            <section class="planner-card">
+                <h2>Attendance</h2>
+
+                {% if subjects %}
+                <table>
+                    <thead>
+                        <tr><th>Subject</th><th>Attendance</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for subject in subjects %}
+                        <tr>
+                            <td>{{ subject["name"] }}</td>
+                            <td>
+                                {{ subject["attended"] }} / {{ subject["total"] }} classes
+                                <span class="attendance-summary">{{ attendance_summary(subject["attended"], subject["total"]) }}</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <p>No subjects added yet.</p>
+                {% endif %}
+
+                <h3>Add a subject</h3>
+                <form method="post" action="/subjects">
+                    <label for="subject-name">Subject name</label>
+                    <input id="subject-name" name="name" maxlength="60" required>
+                    <button>Add subject</button>
+                </form>
+
+                {% if subjects %}
+                <h3>Mark attendance</h3>
+                <form method="post" action="/attendance">
+                    <label for="subject">Subject</label>
+                    <select id="subject" name="subject_id">
+                        {% for subject in subjects %}
+                        <option value="{{ subject['id'] }}"
+                                data-attended="{{ subject['attended'] }}"
+                                data-total="{{ subject['total'] }}">
+                            {{ subject["name"] }}
+                        </option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="class-date">Class date</label>
+                    <input id="class-date" name="class_date" type="date" required>
+
+                    <label for="period">Period</label>
+                    <input id="period" name="period" type="number"
+                           min="1" max="12" value="1" required>
+
+                    <label for="status">Status</label>
+                    <select id="status" name="present">
+                        <option value="1">Present</option>
+                        <option value="0">Absent</option>
+                    </select>
+
+                    <p id="attendance-preview" aria-live="polite"></p>
+                    <button>Save attendance</button>
+                </form>
+                {% endif %}
+            </section>
+
+            <!-- Second card -->
+            <section class="planner-card">
+                <h2>Tasks and deadlines</h2>
+
+                <table>
+                    <thead>
+                        <tr><th>Task</th><th>Due date</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <td>{{ task["title"] }}</td>
+                            <td>{{ task["due_date"] }}</td>
+                            <td>
+                                {% if task["done"] %}
+                                <span class="task-completed">Completed</span>
+                                {% else %}
+                                <form method="post" action="/tasks/{{ task['id'] }}/done">
+                                    <button class="done-button">Mark done</button>
+                                </form>
+                                {% endif %}
+                                <form method="post" action="/tasks/{{ task['id'] }}/delete">
+                                    <button class="delete-button">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3">No tasks yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3>Add a task</h3>
+                <form method="post" action="/tasks">
+                    <label for="task-title">Task name</label>
+                    <input id="task-title" name="title" maxlength="100" required>
+
+                    <label for="due-date">Due date</label>
+                    <input id="due-date" name="due_date" type="date" required>
+
+                    <button>Add task</button>
+                </form>
+            </section>
+
+            <!-- Third card -->
+            <section class="planner-card">
+                <h2>Course grades</h2>
+
+                {% if cgpa is not none %}
+                <p class="cgpa-result">CGPA: <strong>{{ "%.2f"|format(cgpa) }} / 10</strong></p>
+                {% endif %}
+
+                <table>
+                    <thead>
+                        <tr><th>Course</th><th>Credits</th><th>Points</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for grade in grades %}
+                        <tr>
+                            <td>{{ grade["course"] }}<br><small>Sem {{ grade["semester"] }}</small></td>
+                            <td>{{ grade["credits"] }}</td>
+                            <td>{{ grade["grade_points"] }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3">No grades yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3>Add a grade</h3>
+                <form method="post" action="/grades">
+                    <label for="semester">Semester</label>
+                    <input id="semester" name="semester" type="number" min="1" required>
+
+                    <label for="course">Course name</label>
+                    <input id="course" name="course" maxlength="60" required>
+
+                    <label for="credits">Credits</label>
+                    <input id="credits" name="credits" type="number" min="1" required>
+
+                    <label for="grade-points">Grade points out of 10</label>
+                    <input id="grade-points" name="grade_points" type="number"
+                           min="0" max="10" step="any" required>
+
+                    <button>Save grade</button>
+                </form>
+            </section>
+
+        </div>
+
+        <form method="post" action="/logout">
+            <button>Log out</button>
+        </form>
+    </main>
+</body>
+</html>

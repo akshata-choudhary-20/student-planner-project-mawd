@@ -1,0 +1,283 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #eef4ef;
+    padding: 20px;
+}
+
+main {
+    max-width: 360px;
+    margin: 50px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 10px;
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 5px 0 15px;
+}
+
+button {
+    background: #346749;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    font-size: 34px;
+    color: #284b36;
+}
+
+input, button {
+    font: inherit;
+}
+
+.success {
+    color: #285a3c;
+    background: #e8f4eb;
+    padding: 10px;
+}
+
+.error {
+    color: #a12727;
+}
+
+.subjects {
+    margin: 24px 0;
+    padding-top: 12px;
+    border-top: 1px solid #cfdcd3;
+}
+
+.subjects li {
+    margin-bottom: 6px;
+    color: #284b36;
+}
+
+.attendance {
+    margin: 24px 0;
+    padding-top: 12px;
+    border-top: 1px solid #cfdcd3;
+}
+
+.attendance select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px;
+    font: inherit;
+}
+
+.attendance-summary {
+    display: block;
+    margin: 4px 0 12px;
+    white-space: pre-line;
+}
+
+.tasks {
+    margin: 24px 0;
+}
+
+.task-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #d4dfd7;
+}
+
+.task-item small {
+    display: block;
+    color: #496451;
+}
+
+.done-button {
+    width: auto;
+    margin: 8px 0 0;
+    padding: 5px 12px;
+}
+
+.task-completed {
+    display: inline-block;
+    margin-top: 6px;
+    color: #285a3c;
+    font-weight: bold;
+}
+
+.delete-button {
+    width: auto;
+    margin: 6px 0 0;
+    padding: 5px 12px;
+    background: white;
+    color: #923838;
+    border: 1px solid #923838;
+}
+
+.grades {
+    margin: 24px 0;
+}
+
+.grade-entry {
+    padding: 10px 0;
+    border-bottom: 1px solid #d4dfd7;
+}
+
+.cgpa-result {
+    padding: 12px;
+    background: #e8f4eb;
+    border-left: 4px solid #346749;
+}
+
+#attendance-preview {
+    padding: 8px 12px;
+    background: #eef4ef;
+    color: #284b36;
+}
+
+.planner-dashboard {
+    max-width: 760px;
+}
+
+.dashboard-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 20px 0;
+}
+
+.dashboard-tabs button {
+    width: auto;
+    margin: 0;
+    background: #e6eee8;
+    color: #284b36;
+}
+
+.dashboard-tabs button[aria-pressed="true"] {
+    background: #346749;
+    color: white;
+}
+
+.dashboard-panel {
+    overflow-x: auto;
+}
+
+.dashboard-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.dashboard-panel th,
+.dashboard-panel td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #d4dfd7;
+}
+
+.dashboard-panel th {
+    background: #eef4ef;
+}
+
+.advice-cell {
+    white-space: pre-line;
+}
+
+.planner-dashboard {
+    max-width: 1400px;
+}
+
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+.dashboard-columns > .dashboard-panel {
+    min-width: 0;
+    margin: 0;
+    padding: 16px;
+    border: 1px solid #d4dfd7;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 14px;
+    align-items: stretch;
+    overflow-x: auto;
+}
+
+main.planner-dashboard {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 16px;
+}
+
+.planner-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(290px, 1fr));
+    gap: 16px;
+    align-items: start;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.planner-card {
+    padding: 16px;
+    background: white;
+    border: 2px solid #8bcbd2;
+    border-radius: 12px;
+}
+
+.planner-card h2 {
+    margin: 0 0 14px;
+    color: #284b36;
+}
+
+.planner-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.planner-card th,
+.planner-card td {
+    padding: 6px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #d4dfd7;
+    overflow-wrap: anywhere;
+}
+
+.planner-card th {
+    background: #eef4ef;
+}
+
+.planner-card select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    font: inherit;
+}
+
+.planner-card .delete-button,
+.planner-card .done-button,
+.planner-card .task-completed {
+    white-space: nowrap;
+}
+
+.planner-cards > .planner-card {
+    align-self: stretch;
+    height: auto;
+    margin-bottom: 0;
+}
+
