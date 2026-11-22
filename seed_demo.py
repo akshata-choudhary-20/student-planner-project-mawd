@@ -1,0 +1,60 @@
+#Run from the student_planner folder on a new deployment.
+
+import hashlib
+import secrets
+import sqlite3
+from contextlib import closing
+
+from main import create_tables
+
+
+def seed_demo():
+    create_tables()
+    with closing(sqlite3.connect("planner.db")) as db, db:
+        db.execute("BEGIN IMMEDIATE")
+        username = "student 01"
+        if db.execute("SELECT id FROM students WHERE username = ?", (username,)).fetchone():
+            print("student 01 already exists. Its password and records have been preserved.")
+            return
+
+        salt = secrets.token_hex(16)
+        password_hash = hashlib.pbkdf2_hmac(
+            "sha256", b"PlannerDemo01!", bytes.fromhex(salt), 600_000
+        ).hex()
+        student = db.execute(
+            "INSERT INTO students (username, salt, password_hash) VALUES (?, ?, ?)",
+            (username, salt, password_hash),
+        ).lastrowid
+
+        attendance = {
+            "Mathematics": [("2026-11-22", 1, 0)],
+            "physics": [("2026-11-21", 1, 1), ("2026-11-22", 2, 1)],
+            "testing subject": [("2026-11-22", 1, 0)],
+        }
+        for name, classes in attendance.items():
+            subject = db.execute(
+                "INSERT INTO subjects (student_id, name) VALUES (?, ?)", (student, name)
+            ).lastrowid
+            for day, period, present in classes:
+                db.execute(
+                    "INSERT INTO attendance (subject_id, class_date, period, present) VALUES (?, ?, ?, ?)",
+                    (subject, day, period, present),
+                )
+
+        db.executemany(
+            "INSERT INTO tasks (student_id, title, due_date, done) VALUES (?, ?, ?, ?)",
+            [
+                (student, "finish maths assignment", "2026-12-01", 1),
+                (student, "finish  english assignment", "2026-11-20", 0),
+            ],
+        )
+        db.executemany(
+            "INSERT INTO grades (student_id, semester, course, credits, grade_points) VALUES (?, ?, ?, ?, ?)",
+            [(student, 1, "english", 2, 8), (student, 1, "mathematics", 4, 9),
+             (student, 1, "physics", 4, 6)],
+        )
+    print("Demo account created.")
+
+
+if __name__ == "__main__":
+    seed_demo()
