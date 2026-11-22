@@ -22,14 +22,16 @@ https://student-planner-project-mawd-1.onrender.com/login
 
 This shared account contains fictional student records. You can also register your own account to start with an empty dashboard.
 
-![Student 01 dashboard](dashboard-preview.png)
+![Student 01 dashboard](dashboard-new.png)
 
 
 ### Attendance
 
-- Mathematics: attended 0 of 1 class
+- Mathematics: attended 2 of 3 class
 - Physics: attended 2 of 2 classes
 - Testing subject: attended 0 of 1 class
+- English: attended 3 of 4
+- social: attended 3 of 4 classes
 
 ### Tasks
 
@@ -41,8 +43,11 @@ This shared account contains fictional student records. You can also register yo
 - English: 8 grade points, 2 credits
 - Mathematics: 9 grade points, 4 credits
 - Physics: 6 grade points, 4 credits
+- testing subject: 3 grade points, 8 credits
+- social: 4 grade points, 6 credits
 
-**CGPA: 7.60 / 10**
+
+**CGPA: 6.59 / 10**
 
 ## How to run it on Windows(Source)
 
