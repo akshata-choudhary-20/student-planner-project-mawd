@@ -4,6 +4,11 @@ I built this website to keep track of attendance, assignment deadlines, and grad
 
 https://wt11gcth-8000.inc1.devtunnels.ms/login
 
+
+**Username:** `student 01`  
+**Password on the deployed demo:** `PlannerDemo01!`
+
+
 ## Features
 
 - **Attendance:** Add subjects, mark classes present or absent, and see how many classes you need to attend to reach 75%. To correct an entry, save the same subject, date, and period again.
