@@ -72,6 +72,11 @@ def create_tables():
 create_tables()
 
 
+@app.get("/")
+def home():
+    return RedirectResponse("/login", status_code=303)
+
+
 @app.get("/register")
 def show_register_page(request: Request):
     return templates.TemplateResponse(
