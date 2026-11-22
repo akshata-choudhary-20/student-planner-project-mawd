@@ -2,22 +2,13 @@
 
 I built this website to keep track of attendance, assignment deadlines, and grades in one place. Each student has their own account and dashboard.
 
-<<<<<<< HEAD
 https://student-planner-project-mawd-1.onrender.com/login
-
-=======
->>>>>>> 12cdeab6a966dd005d9836974eea69a12ee20e9d
 
 **Username:** `student 01`  
 **Password on the deployed demo:** `PlannerDemo01!`
 
-
-<<<<<<< HEAD
 **Username:** `student 02`  
 **Password on the deployed demo:** PlannerDemo02!
-
-=======
->>>>>>> 12cdeab6a966dd005d9836974eea69a12ee20e9d
 ## Features
 
 - **Attendance:** Add subjects, mark classes present or absent, and see how many classes you need to attend to reach 75%. To correct an entry, save the same subject, date, and period again.

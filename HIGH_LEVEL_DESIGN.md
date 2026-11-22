@@ -16,4 +16,4 @@ When a student marks a class present, the browser sends the selected subject, da
 
 ## Student access
 
-Each student uses the same dashboard layout but sees their own records. The backend identifies the student from their login session when loading or changing data.
+Each student uses the same dashboard layout but sees their own records. The backend identifies the student from their login session when loading or changing data.!
