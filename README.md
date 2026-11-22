@@ -15,6 +15,9 @@ I built this website to keep track of attendance, assignment deadlines, and grad
 
 This shared account contains fictional student records. You can also register your own account to start with an empty dashboard.
 
+![Student 01 dashboard](dashboard-preview.png)
+
+
 ### Attendance
 
 - Mathematics: attended 0 of 1 class
