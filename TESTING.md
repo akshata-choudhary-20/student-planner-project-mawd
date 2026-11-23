@@ -8,7 +8,7 @@ again as absent. Refresh the dashboard.
 **Expected result:** The attended count changes from 1 to 0. The total
 stays at 1, and the correction is still visible after refreshing.
 
-**Actual result:** # Student Academic Planner Testing
+**Actual result:** Same as expected
 
 ## 1. Correcting an attendance entry
 
