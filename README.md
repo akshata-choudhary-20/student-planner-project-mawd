@@ -22,7 +22,7 @@ https://student-planner-project-mawd-1.onrender.com/login
 
 This shared account contains fictional student records. You can also register your own account to start with an empty dashboard.
 
-![Student 01 dashboard](dashboard-New.png)
+![Student 01 dashboard](Dashboard-New.png)
 
 
 ### Attendance
